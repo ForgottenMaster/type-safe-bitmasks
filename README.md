@@ -9,7 +9,7 @@ This section displays a sample usage of the library macro in order to give a poi
 ```cpp
 #include "bitmask.h"
 
-DECLARE_BITMASK_ENUM(Foo, Value_1, Value_2, Value_3)
+DECLARE_BITMASK_ENUM(Foo, Value_1, Value_2, Value_3);
 
 constexpr auto bitmask = Foo::Value_1 | Foo::Value_2;
 constexpr auto bit = Foo::Value_1;
