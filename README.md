@@ -54,6 +54,8 @@ Aside from bitwise operations we can perform on Bitmasks, they are also able to 
 # Accessing Bits
 Calling the macro to generate a bitmask type will generate not only the enum class with correct shifted values for the variants, but also, for each variant, will construct a Bit instance and make it available as a static member on the named class.
 
+As well as the named variants defined in the macro, another Bit instance is generated called "NONE", accessed as in for example Foo::NONE. This instance is a strongly typed lack of any bits being set and is used for example as a return from the "Bitmask & Bit" operator.
+
 # Constexpr Compatible
 All of the Bit instances, the bitwise operators, and conversion operators are constexpr compatible, and so can be used in constexpr contexts such as using static_asserts to verify the behaviour of the API.
 
@@ -63,12 +65,12 @@ There are limitations and/or as of yet unimplemented features:
 * Bitmasks can only be constructed with up to 64 variants/bits.
 * The bitwise assignment operators &=, |=, ^= for Bitmask aren't yet implemented.
 
-# Unary bitwise operations support
+# Unary Bitwise Operations Support
 Operation | Bit | Bitmask
 ----------|-----|--------
 ~ | Yes | Yes
 
-# Binary bitwise operations support
+# Binary Bitwise Operations Support
 The following table shows the binary bitwise operations on the side and the pairs of instances they operate on along the top. The cells contain the return types of the operation.
 
  | Bit/Bit | Bit/Bitmask | Bitmask/Bit | Bitmask/Bitmask
@@ -76,3 +78,29 @@ The following table shows the binary bitwise operations on the side and the pair
 & | Bit | Bit | Bit | Bitmask
 \| | Bitmask | Bitmask | Bitmask | Bitmask
 ^ | Bitmask | Bitmask | Bitmask | Bitmask
+
+# Full Example
+```cpp
+#include "bitmask.h"
+
+DECLARE_BITMASK_ENUM_8(Foo, V1, V2, V3, V4);
+
+int main() {
+    constexpr auto bit1 = Foo::V1;
+    constexpr auto bit3 = Foo::V3;
+    constexpr auto masked = bit1 | bit3;
+    
+    std::cout << bit1 << std::endl; // prints "Bit<Foo>{ 0001 }"
+    std::cout << bit3 << std::endl; // prints "Bit<Foo>{ 0100 }"
+    std::cout << masked << std::endl; // prints "Bitmask<Foo>{ 0101 }"
+    std::cout << ~Foo::V4 << std::endl; // prints "Bitmask<Foo>{ 0111 }"
+    
+    // switch prints "Correct" as the operation resolves to bit1 (i.e. Foo::V1)
+    switch(masked & bit1) {
+        case Foo::V1: std::cout << "Correct" << std::endl; break;
+        default: std::cout << "Incorrect" << std::endl;
+    }
+    
+    return 0;
+}
+```
