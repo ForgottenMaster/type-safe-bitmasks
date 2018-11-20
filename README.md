@@ -25,7 +25,14 @@ The backing type is always an unsigned integer and is one of 8, 16, 32, or 64 bi
 
 Additionally, the user is able to specify the name of the generated type, along with the bit names, but is not able to specify the integer values for the bits. This is because when dealing with bitmasks and bits, we only really need care about the names of the bits, and in most cases, individual bits represented in the enumeration are assigned continuous, ascending powers of two. We shouldn't give the user the opportunity to set their own values because it would allow for accidental issues such as assigning a non power of two, or repeating values.
 
-As mentioned, the macros all follow the form: DECLARE_BITMASK_ENUM_<bit count>(<type name>, <variant 1 name>, <variant 2 name>, etc.)
+The 4 macros therefore are as demonstrated below
+
+```cpp
+DECLARE_BITMASK_ENUM_8(Bitmask8, V1, V2, V3);
+DECLARE_BITMASK_ENUM_16(Bitmask16, V1, V2, V3);
+DECLARE_BITMASK_ENUM_32(Bitmask32, V1, V2);
+DECLARE_BITMASK_ENUM_64(Bitmask64, V1, V2, V3, V4);
+```
   
 The additional 5th macro is used when we don't want to define a bit count and is an alias for the 64 bit variant to allow maximum number of values to be specified.
 
