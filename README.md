@@ -62,3 +62,8 @@ There are limitations and/or as of yet unimplemented features:
 * The user cannot convert to and from the underlying representation of the bitmask/bit, therefore direct serialization like this is not possible currently. Accepting a raw integer to construct a Bitmask would break the strong compile time guarantees we have from types, so I don't want to allow this and probably need to think of another way to do this (possibly using arrays of Bit instances).
 * Bitmasks can only be constructed with up to 64 variants/bits.
 * The bitwise assignment operators &=, |=, ^= for Bitmask aren't yet implemented.
+
+# Unary bitwise operations support
+Operation | Bit | Bitmask
+----------|-----|--------
+~ | Yes | Yes
