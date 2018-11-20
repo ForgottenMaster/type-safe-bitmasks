@@ -67,3 +67,12 @@ There are limitations and/or as of yet unimplemented features:
 Operation | Bit | Bitmask
 ----------|-----|--------
 ~ | Yes | Yes
+
+# Binary bitwise operations support
+The following table shows the binary bitwise operations on the side and the pairs of instances they operate on along the top. The cells contain the return types of the operation.
+
+ | Bit/Bit | Bit/Bitmask | Bitmask/Bit | Bitmask/Bitmask
+ |---------|-------------|-------------|----------------
+& | Bit | Bit | Bit | Bitmask
+| | Bitmask | Bitmask | Bitmask | Bitmask
+^ | Bitmask | Bitmask | Bitmask | Bitmask
