@@ -74,5 +74,5 @@ The following table shows the binary bitwise operations on the side and the pair
  | Bit/Bit | Bit/Bitmask | Bitmask/Bit | Bitmask/Bitmask
  |---------|-------------|-------------|----------------
 & | Bit | Bit | Bit | Bitmask
-| | Bitmask | Bitmask | Bitmask | Bitmask
+\| | Bitmask | Bitmask | Bitmask | Bitmask
 ^ | Bitmask | Bitmask | Bitmask | Bitmask
